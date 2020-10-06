@@ -32,19 +32,13 @@ describe("Test deck", function() {
 
         const deck = new Deck(config)
         const result = deck.shuffle()
-        console.log("result ", result)
-        // expect(result).toBe(true);
-    })
 
-    // it("shuffle : the function return false if the deck is not correctly shuffled", function() {
-    //     const config = {
-    //         cards: [1,2,3]
-    //     }
-    //
-    //     const deck = new Deck(config)
-    //     const result = deck.shuffle()
-    //     expect(result).toBe(false);
-    // })
+        if (JSON.stringify(deck.cards) !== JSON.stringify([1,2,3])) {
+            expect(result).toBe(true);
+        } else {
+            expect(result).toBe(false);
+        }
+    })
 
     it("insertAt : add new card in the deck", function() {
         const config = {
@@ -52,19 +46,19 @@ describe("Test deck", function() {
         }
 
         const deck = new Deck(config)
-        const result = deck.insertAt(4, 3)
-        console.log("result ", result)
-        expect(result).toEqual([1,2,3,4]);
+        deck.insertAt(4, 2)
+        expect(deck.cards).toEqual([1,2,4,3]);
     })
 
     it("draw : take and remove the deck first card", function () {
         const config = {
             cards: [1,2,3]
-        }
+        };
 
-        const deck = new Deck(config)
-        const result = deck.draw()
+        const deck = new Deck(config);
+        const result = deck.draw();
         expect(result).toEqual(1);
+        expect(deck.cards).toEqual( [2,3]);
     });
 
     it("getCardsCount : return the length of the deck", function() {

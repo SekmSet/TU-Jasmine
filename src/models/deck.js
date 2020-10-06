@@ -12,7 +12,6 @@ export default class Deck {
         const array = this.cards
         const arrayCopy = array.slice()
         this.shuffleArray(array)
-        console.log(array, arrayCopy)
         return JSON.stringify(array) !== JSON.stringify(arrayCopy);
     }
 
@@ -38,7 +37,6 @@ export default class Deck {
     }
 
     getCardsCount () {
-        console.log(this.cards)
         return this.cards.length
     }
 }

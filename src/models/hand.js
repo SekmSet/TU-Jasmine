@@ -1,21 +1,25 @@
 
 export default class Hand {
-    constructor (config, limit = 7) {
+    constructor (config) {
+
         if (!(config.cards instanceof Array)) {
             throw new Error('cards is not an array')
         }
 
-        if (!Number.isInteger(limit)) {
+        if (config.limit === undefined) {
+            config.limit = 7
+        }
+
+        if (!Number.isInteger(config.limit)) {
             throw new Error('limit is not an integer')
         }
 
-        this.limit = limit
+        this.limit = config.limit
         this.cards = config.cards
     }
 
     addCard(card){
-        console.log(this.cards)
-        if(this.cards.length <= this.limit){
+        if(this.cards.length < this.limit){
             this.cards.push(card)
             return true
         } else {
@@ -24,6 +28,9 @@ export default class Hand {
     }
 
     removeCard(position){
+        if (!this.cards.hasOwnProperty(position)) {
+            return false
+        }
         const removeCard = this.cards[position]
         this.cards = this.cards.filter((card, index) => index !== position)
         return removeCard
